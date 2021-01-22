@@ -1,0 +1,25 @@
+.dialogs {
+    display: flex;
+    margin: 25px;
+}
+
+.active {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.dialogsItems {
+    padding: 10px;
+}
+
+.dialogsItem {
+    /*padding: 10px;*/
+}
+
+.msgs {
+    padding: 10px;
+}
+
+.msg {
+    /*padding: 10px;*/
+}

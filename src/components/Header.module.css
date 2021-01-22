@@ -1,0 +1,27 @@
+.header {
+    display: flex;
+    background-color: rebeccapurple;
+    width: 100%;
+}
+
+.logo {
+    width: 150px;
+    height: 100px;
+    /*width: 15vw;*/
+    margin: 10px 20px;
+}
+
+.menu {
+    display: flex;
+    margin: 10px 20px;
+    justify-content: space-around;
+    width: 80vw;
+}
+
+.menu div {
+    margin: 0 20px;
+}
+
+.menu div a {
+    color: lightgray;
+}

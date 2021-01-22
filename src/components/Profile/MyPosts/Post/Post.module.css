@@ -1,0 +1,34 @@
+.item {
+    margin: 25px;
+    padding: 10px 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Параметры тени */
+
+    display: flex;
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+}
+
+.like {
+    width: 30px;
+    height: 30px;
+    margin-top: 10px;
+}
+
+.like:hover {
+    transform: scale(1.1);
+    /*box-shadow: 0 0 10px rgba(0,0,0,0.5); !* Параметры тени *!*/
+}
+
+.logodiv {
+    display: flex;
+    margin: 10px;
+}
+
+.txt {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
