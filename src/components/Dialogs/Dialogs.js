@@ -7,23 +7,37 @@ const Dialogs = (props) => {
 
     let dialogs = props.dialogs;
     let messages = props.messages;
-    let dialogsElements = dialogs.map( el => <Dialog id={el.id} name={el.name} />);
-    let messagesElements = messages.map( message =>  <Message message={message.massage}/>);
+    let dialogsElements = dialogs.map(el => <Dialog id={el.id} name={el.name}/>);
+    let messagesElements = messages.map(message => <Message message={message.massage}/>);
+
+    let newElementDialog = React.createRef();
+
+    let addDialog = () => {
+        alert(newElementDialog.current.value);
+    }
 
     return (
-        <div className={d.dialogs}>
-            <div className={d.dialogsItems}>
+        <div>
+            <div className={d.dialogs}>
+                <div className={d.dialogsItems}>
 
-                { dialogsElements }
+                    {dialogsElements}
+
+                </div>
+                <div className={d.msgs}>
+
+                    {messagesElements}
+
+                </div>
+
 
             </div>
-            <div className={d.msgs}>
-
-                {messagesElements}
-
+            <div className={d.addDialogDiv}>
+                <textarea ref={newElementDialog} name="" id="" cols="30" rows="10"></textarea>
+                <div>
+                    <button onClick={addDialog}>Добавить</button>
+                </div>
             </div>
-
-
         </div>
     );
 }

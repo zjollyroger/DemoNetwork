@@ -1,3 +1,5 @@
+import {rerender} from "../Render";
+
 let state = {
     profilePage: {
         posts: [
@@ -6,6 +8,7 @@ let state = {
             {id: 3, post: 'check it out', likesCount: 3},
             {id: 4, post: 'grab the spoon!', likesCount: 15},
         ],
+        newPost: '',
     },
     messagesPage: {
         dialogs: [
@@ -32,5 +35,21 @@ let state = {
 
 }
 
+export let typingNewPost = (newPost) => {
+    state.profilePage.newPost = newPost;
+    rerender(state);
+}
+
+export let addPost = () => {
+    //{id: 1, post: 'Hi everyone!', likesCount: 1},
+    let newPost = {
+        id: 15, post: state.profilePage.newPost, likesCount: 555,
+    }
+
+    state.profilePage.posts.push(newPost);
+    state.profilePage.newPost = '';
+    rerender(state);
+
+}
 
 export default state;
