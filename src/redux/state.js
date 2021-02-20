@@ -1,4 +1,6 @@
-import {rerender} from "../Render";
+let rerender = () => {
+
+}
 
 let state = {
     profilePage: {
@@ -35,6 +37,8 @@ let state = {
 
 }
 
+window.state = state;
+
 export let typingNewPost = (newPost) => {
     state.profilePage.newPost = newPost;
     rerender(state);
@@ -50,6 +54,11 @@ export let addPost = () => {
     state.profilePage.newPost = '';
     rerender(state);
 
+}
+
+
+export let subscribe = (observer) => {
+    rerender = observer;
 }
 
 export default state;
