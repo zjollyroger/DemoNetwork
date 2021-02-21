@@ -31,32 +31,37 @@ let store = {
             ],
         }
     },
+    _callSubscriber () {},
 
     getState () {
         return this._state;
     },
-
-    _rerender () {},
-
-    typingNewPost  (newPost) {
+    _typingNewPost  (newPost) {
         this._state.profilePage.newPost = newPost;
-        this._rerender(this._state);
+        this._callSubscriber(this._state);
     },
-
-    addPost () {
+    _addPost () {
         //{id: 1, post: 'Hi everyone!', likesCount: 1},
         let newPost = {
             id: 15, post: this._state.profilePage.newPost, likesCount: 555,
         }
         this._state.profilePage.posts.push(newPost);
         this._state.profilePage.newPost = '';
-        this._rerender(this._state);
+        this._callSubscriber(this._state);
+    },
+    subscribe (observer) {
+        this._callSubscriber = observer;
     },
 
-    subscribe (observer) {
-        this._rerender = observer;
-    }
+    dispatch(action) { // action is object, necessarily contained type
+        switch(action.type) {
+            case ('ADD_POST') :  this._addPost(); break;
+            case ('TYPE_NEW_TEXT') :  this._typingNewPost(action.newText); break;
+        }
+    },
+
 }
+
 
 
 window.store = store;

@@ -9,11 +9,7 @@ import App from './App';
 import store from "./redux/state";
 
  let rerender = () => {
-    ReactDOM.render(<App  state={store.getState()}
-                          addPost = {store.addPost.bind(store)}
-                          typingNewPost = {store.typingNewPost.bind(store)}
-                          typingValue = {store.getState().profilePage.newPost}
-        />,
+    ReactDOM.render(<App  state={store.getState()}  dispatch = {store.dispatch.bind(store)} />,
         document.getElementById('root'));
 };
 
