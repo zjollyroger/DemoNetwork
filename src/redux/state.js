@@ -1,5 +1,7 @@
 const ADD_POST = 'ADD_POST';
 const TYPE_NEW_TEXT = 'TYPE_NEW_TEXT';
+const ADD_MSG = 'ADD_MSG';
+const TYPE_NEW_MSG = 'TYPE_NEW_MSG';
 
 let store = {
     _state: {
@@ -20,11 +22,12 @@ let store = {
                 {id: '4', name: 'Karrie'},
             ],
             messages: [
-                {id: 1, massage: 'hi'},
-                {id: 2, massage: 'shalom'},
-                {id: 3, massage: 'hel lol keck'},
-                {id: 4, massage: 'kuku'},
+                {id: 1, message: 'hi'},
+                {id: 2, message: 'shalom'},
+                {id: 3, message: 'hel lol keck'},
+                {id: 4, message: 'kuku'},
             ],
+            newMsg: '',
         },
         friendsPage: {
             friends: [
@@ -39,6 +42,8 @@ let store = {
     getState () {
         return this._state;
     },
+
+    //POST
     _typingNewPost  (newPost) {
         this._state.profilePage.newPost = newPost;
         this._callSubscriber(this._state);
@@ -52,6 +57,19 @@ let store = {
         this._state.profilePage.newPost = '';
         this._callSubscriber(this._state);
     },
+
+    // dialogs messages
+    _typingNewMsg  (newMsg) {
+        this._state.messagesPage.newMsg = newMsg;
+        this._callSubscriber(this._state);
+    },
+    _addMsg () {
+        let newMsg = {id: 15, message: this._state.messagesPage.newMsg,}
+        this._state.messagesPage.messages.push(newMsg);
+        this._state.messagesPage.newMsg = '';
+        this._callSubscriber(this._state);
+    },
+
     subscribe (observer) {
         this._callSubscriber = observer;
     },
@@ -60,15 +78,17 @@ let store = {
         switch(action.type) {
             case (ADD_POST) :  this._addPost(); break;
             case (TYPE_NEW_TEXT) :  this._typingNewPost(action.newText); break;
+            case (ADD_MSG) :  this._addMsg(); break;
+            case (TYPE_NEW_MSG) :  this._typingNewMsg(action.newMsg); break;
         }
     },
 }
 
 
-   export const addPostActionCreator = () =>  ({type: ADD_POST})
-
-
-    export const onPostChangeActionCreator = (text) => ({type: TYPE_NEW_TEXT,newText: text})
+   export const addPostActionCreator = () =>  ({type: ADD_POST});
+   export const onPostChangeActionCreator = (text) => ({type: TYPE_NEW_TEXT,newText: text});
+    export const addMsgActionCreator = () =>  ({type: ADD_MSG});
+   export const onMsgChangeActionCreator = (text) => ({type: TYPE_NEW_MSG,newMsg: text});
 
 
 
