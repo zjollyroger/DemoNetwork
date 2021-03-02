@@ -1,3 +1,6 @@
+const ADD_POST = 'ADD_POST';
+const TYPE_NEW_TEXT = 'TYPE_NEW_TEXT';
+
 let store = {
     _state: {
         profilePage: {
@@ -55,12 +58,17 @@ let store = {
 
     dispatch(action) { // action is object, necessarily contained type
         switch(action.type) {
-            case ('ADD_POST') :  this._addPost(); break;
-            case ('TYPE_NEW_TEXT') :  this._typingNewPost(action.newText); break;
+            case (ADD_POST) :  this._addPost(); break;
+            case (TYPE_NEW_TEXT) :  this._typingNewPost(action.newText); break;
         }
     },
-
 }
+
+
+   export const addPostActionCreator = () =>  ({type: ADD_POST})
+
+
+    export const onPostChangeActionCreator = (text) => ({type: TYPE_NEW_TEXT,newText: text})
 
 
 
