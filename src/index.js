@@ -13,7 +13,7 @@ import store from "./redux/state";
         document.getElementById('root'));
 };
 
-rerender(state);
+rerender();
 
 store.subscribe(rerender);
 // If you want your app to work offline and load faster, you can change

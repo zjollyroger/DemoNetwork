@@ -2,7 +2,7 @@ import React from 'react';
 import d from './Dialogs.module.css';
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
-import {addMsgActionCreator, onMsgChangeActionCreator} from "../../redux/state";
+import {addMsgActionCreator, onMsgChangeActionCreator} from "../../redux/dialogsReducer";
 
 const Dialogs = (props) => {
 
@@ -18,8 +18,8 @@ const Dialogs = (props) => {
     }
 
     let onMsgChange = (e) => {
-        let textzzz = e.target.value;
-        props.dispatch(onMsgChangeActionCreator(textzzz));
+        let textMsg = e.target.value;
+        props.dispatch(onMsgChangeActionCreator(textMsg));
     }
 
     return (
@@ -33,7 +33,9 @@ const Dialogs = (props) => {
                 </div>
             </div>
             <div className={d.addDialogDiv}>
-                <textarea name="" id="" cols="30" rows="10" value={typingValue} onChange={onMsgChange}>
+                <textarea name="" id="" cols="30" rows="10" value={typingValue} onChange={onMsgChange}
+                    placeholder='live your feed in history and let computer machine work!'
+                >
 
                 </textarea>
                 <div>

@@ -29,7 +29,7 @@ const App = (props) => {
 
                     <Route path='/profile' render={()=><Profile posts={props.state.profilePage.posts}
                                                                 dispatch = {props.dispatch}
-                                                                typingValue={props.state.profilePage.newPost}/>}/>
+                                                                typingValue={props.state.profilePage.newPostText}/>}/>
                     <Route exact path='/dialogs' render={()=><Dialogs messagesPage={props.state.messagesPage}   dispatch = {props.dispatch} />}/>
                     <Route path='/news'><News/></Route>
                     <Route path='/music'><Music/></Route>
