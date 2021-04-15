@@ -6,9 +6,9 @@ import {addMsgActionCreator, onMsgChangeActionCreator} from "../../redux/dialogs
 
 const Dialogs = (props) => {
 
-    let typingValue = props.messagesPage.newMsg;
-    let dialogs = props.messagesPage.dialogs;
-    let messages = props.messagesPage.messages;
+    let typingValue = props.dialogsPage.newMsg;
+    let dialogs = props.dialogsPage.dialogs;
+    let messages = props.dialogsPage.messages;
     let dialogsElements = dialogs.map(el => <Dialog id={el.id} name={el.name}/>);
     let messagesElements = messages.map(message => <Message message={message.message}/>);
 

@@ -1,12 +1,11 @@
 import React from 'react';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import state, {subscribe} from "./redux/state";
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 
-import store from "./redux/state";
+import store from "./redux/reduxStore";
 
  let rerender = () => {
     ReactDOM.render(<App  state={store.getState()}  dispatch = {store.dispatch.bind(store)} />,

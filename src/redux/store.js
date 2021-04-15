@@ -1,6 +1,6 @@
 import profileReducer from "./profileReducer";
 import dialogsReducer from "./dialogsReducer";
-import friendsReducer from "./fiendsReducer";
+import friendsReducer from "./friendsReducer";
 
 let store = {
     _state: {
@@ -13,7 +13,7 @@ let store = {
             ],
             newPostText: '',
         },
-        messagesPage: {
+        dialogsPage: {
             dialogs: [
                 {id: '1', name: 'John'},
                 {id: '2', name: 'Jo'},
