@@ -2,7 +2,7 @@ const ADD_POST = 'ADD_POST';
 const TYPE_NEW_TEXT = 'TYPE_NEW_TEXT';
 
 export const addPostActionCreator = () => ({type: ADD_POST});
-export const onPostChangeActionCreator = (text) => ({type: TYPE_NEW_TEXT, newText: text});
+export const updateNewPostText = (text) => ({type: TYPE_NEW_TEXT, newText: text});
 
 const initialState = {
         posts: [

@@ -14,6 +14,7 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Setting";
 import Friends from "./components/Friends/Friends";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 
 const App = (props) => {
@@ -27,10 +28,8 @@ const App = (props) => {
                     {/*<Profile/>*/}
 
 
-                    <Route path='/profile' render={()=><Profile posts={props.state.profilePage.posts}
-                                                                dispatch = {props.dispatch}
-                                                                typingValue={props.state.profilePage.newPostText}/>}/>
-                    <Route exact path='/dialogs' render={()=><Dialogs dialogsPage={props.state.dialogsPage}   dispatch = {props.dispatch} />}/>
+                    <Route path='/profile' render={()=><Profile store={props.store}/> } />
+                    <Route exact path='/dialogs' render={()=><DialogsContainer store={props.store} /> } />
                     <Route path='/news'><News/></Route>
                     <Route path='/music'><Music/></Route>
                     <Route path='/settings'><Settings/></Route>

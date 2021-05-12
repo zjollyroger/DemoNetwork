@@ -6,20 +6,20 @@ import {addMsgActionCreator, onMsgChangeActionCreator} from "../../redux/dialogs
 
 const Dialogs = (props) => {
 
-    let typingValue = props.dialogsPage.newMsg;
-    let dialogs = props.dialogsPage.dialogs;
-    let messages = props.dialogsPage.messages;
+    let typingValue = props.typingValue;
+    let dialogs = props.dialogs;
+    let messages = props.messages;
     let dialogsElements = dialogs.map(el => <Dialog id={el.id} name={el.name}/>);
     let messagesElements = messages.map(message => <Message message={message.message}/>);
 
 
-    let addMsg = () => {
-        props.dispatch(addMsgActionCreator());
+    let onAddMsg = () => {
+        props.addMsg();
     }
 
     let onMsgChange = (e) => {
         let textMsg = e.target.value;
-        props.dispatch(onMsgChangeActionCreator(textMsg));
+        props.MsgChange(textMsg);
     }
 
     return (
@@ -39,7 +39,7 @@ const Dialogs = (props) => {
 
                 </textarea>
                 <div>
-                    <button onClick={addMsg} >Добавить</button>
+                    <button onClick={onAddMsg} >Добавить</button>
                 </div>
             </div>
         </div>
