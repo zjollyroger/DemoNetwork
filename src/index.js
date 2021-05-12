@@ -6,10 +6,18 @@ import './index.css';
 import App from './App';
 
 import store from "./redux/reduxStore";
+import {BrowserRouter} from "react-router-dom";
+import StoreContext from "./StoreContext";
 
- let rerender = () => {
-    ReactDOM.render(<App store={store} state={store.getState()}  dispatch = {store.dispatch.bind(store)} />,
-        document.getElementById('root'));
+let rerender = () => {
+    ReactDOM.render(
+        <BrowserRouter>
+            <StoreContext.Provider value={store}>
+                <App/>
+            </StoreContext.Provider>
+        </BrowserRouter>
+        , document.getElementById('root')
+    );
 };
 
 rerender();

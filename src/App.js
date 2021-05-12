@@ -28,12 +28,12 @@ const App = (props) => {
                     {/*<Profile/>*/}
 
 
-                    <Route path='/profile' render={()=><Profile store={props.store}/> } />
-                    <Route exact path='/dialogs' render={()=><DialogsContainer store={props.store} /> } />
+                    <Route path='/profile' render={()=><Profile/> } />
+                    <Route exact path='/dialogs' render={()=><DialogsContainer/> } />
                     <Route path='/news'><News/></Route>
                     <Route path='/music'><Music/></Route>
                     <Route path='/settings'><Settings/></Route>
-                    <Route path='/friends' render={()=><Friends friendsData={props.state.friendsPage.friends}/>}/>
+                    <Route path='/friends' render={()=><Friends/>}/>
 
                 </div>
 
