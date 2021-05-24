@@ -16,42 +16,20 @@ const initialState = {
 
 const profileReducer = (state = initialState, action) => {
 
-
-    let typingNewPost = (newPostText) => {
-        let copyState = {...state};
-        copyState.newPostText = newPostText;
-        return copyState;
-    };
-
-    let addPost = () => {
-        //{id: 1, post: 'Hi everyone!', likesCount: 1},
-        let newPost = {
-            id: 15, post: state.newPostText, likesCount: 555,
-        }
-        let copyState = {...state};
-        copyState.posts = [...state.posts];
-        copyState.posts.push(newPost);
-        copyState.newPostText = '';
-        return copyState;
-    };
-
-    switch (action.type) {
+      switch (action.type) {
         case (ADD_POST) : {
             //{id: 1, post: 'Hi everyone!', likesCount: 1},
             let newPost = {
                 id: 15, post: state.newPostText, likesCount: 555,
             }
-            let copyState = {...state};
-            copyState.posts = [...state.posts];
-            copyState.posts.push(newPost);
-            copyState.newPostText = '';
-            return (copyState);
+            return {
+                ...state,
+                posts: [...state.posts, newPost],
+                newPostText: '',
+            };
         }
         case (TYPE_NEW_TEXT) :
-
-            let copyState = {...state};
-            copyState.newPostText = action.newText;
-            return (copyState);
+            return {...state, newPostText: action.newText};
         default:
             return (state);
     }
