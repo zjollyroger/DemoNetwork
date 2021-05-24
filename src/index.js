@@ -9,7 +9,7 @@ import store from "./redux/reduxStore";
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 
-let rerender = () => {
+// let rerender = () => {
     ReactDOM.render(
         <BrowserRouter>
             <Provider store={store}>
@@ -18,11 +18,12 @@ let rerender = () => {
         </BrowserRouter>
         , document.getElementById('root')
     );
-};
+// };
 
-rerender();
+// rerender();
 
-store.subscribe(rerender);
+// store.subscribe(rerender);
+
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
