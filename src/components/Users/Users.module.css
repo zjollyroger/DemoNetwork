@@ -1,0 +1,73 @@
+
+.user_item {
+    display: flex;
+
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.ava {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 130px;
+    height: 90px;
+    border-radius: 4px;
+}
+
+.button {
+    border-radius: 10px;
+    height: 30px;
+    width: 150px;
+    background: #c7fcec;
+    margin-top: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+
+.right {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px;
+    padding: 10px;
+    border: 4px double black; /* Параметры границы */
+    background: #efb1ff ; /* Цвет фона */
+    padding: 10px; /* Поля вокруг текста */
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0.2, 0.5);
+    width: 50vw;
+    font-size: 18px;
+}
+
+.name {
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+    justify-content: space-between;
+}
+
+.status {
+    /*margin-top: 55px;*/
+    border: 4px double black; /* Параметры границы */
+    background: #efb1ff ; /* Цвет фона */
+    padding: 10px; /* Поля вокруг текста */
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0.2, 0.5);
+    cursor: pointer;
+}
+
+
+.loc {
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+}
+
