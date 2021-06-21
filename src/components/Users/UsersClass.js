@@ -30,24 +30,14 @@ const users = [
 ];
 
 class UsersClass extends React.Component {
-    constructor(props) {
-        super(props);
+
+    componentDidMount() {
+        // alert('componentDidMount');
         axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
                 console.log(response.data.items, 'api here');
                 this.props.setUsers(response.data.items);
             }
         );
-    }
-
-    getUsers = () => {
-        if (this.props.users.length === 0) {
-            axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-                    console.log(response.data.items, 'api here');
-                    this.props.setUsers(response.data.items);
-                }
-            );
-
-        }
     }
 
     render() {
