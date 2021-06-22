@@ -2,6 +2,7 @@ import React from "react";
 import i from './Users.module.css'
 import * as axios from "axios";
 import userNoPhoto from "../../assets/images/faceoff.jpg";
+import {impureFinalPropsSelectorFactory} from "react-redux/lib/connect/selectorFactory";
 
 const users = [
     {
@@ -33,17 +34,46 @@ class UsersClass extends React.Component {
 
     componentDidMount() {
         // alert('componentDidMount');
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.selectedPage}&count=${this.props.pageSize}`).then(response => {
                 console.log(response.data.items, 'api here');
                 this.props.setUsers(response.data.items);
+                this.props.setTotalUsersCount(response.data.totalCount);
             }
         );
     }
 
+    onPageChange= (page) => {
+        this.props.setSelectedPage(page);
+
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`).then(response => {
+                console.log(response.data.items, 'api here');
+                this.props.setUsers(response.data.items);
+            }
+        );
+
+    }
+
+
     render() {
+
+        let pages = Math.ceil(this.props.totalUsersCount/this.props.pageSize);
+
+        let pagesArr = [];
+        for (let i=1; i <= pages; i++) {
+            pagesArr = [...pagesArr, i];
+        }
+
         return (
             <div>
 
+                <h4 className={i.pages}>TOTAL USERS: {this.props.totalUsersCount}</h4>
+
+                <div className={i.pages}>
+                    {pagesArr.map((page,index) =>
+                         <span key={index} onClick={()=>this.onPageChange(page)} className={(page === this.props.selectedPage) && i.selectedPage}>{page}</span>
+                     )}
+
+                </div>
                 {this.props.users.map((user, key) => {
 
                     return (

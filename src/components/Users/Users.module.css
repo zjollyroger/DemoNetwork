@@ -71,3 +71,21 @@
     margin: 15px;
 }
 
+.pages {
+    margin: 20px;
+}
+
+.pages span {
+    margin: 1px;
+    padding: 5px;
+}
+
+.pages span:hover {
+    cursor: pointer;
+    transform: scale(1.5);
+
+}
+
+.selectedPage {
+    font-weight: 700;
+}
