@@ -91,3 +91,10 @@
 .selectedPage {
     font-weight: 700;
 }
+
+.load {
+    margin: 50px;
+    /*width: 200px;*/
+    /*height: 200px;*/
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
