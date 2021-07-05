@@ -2,3 +2,73 @@
     width: 80px;
     height: 80px;
 }
+
+.lookingForAJob {
+    max-width: 250px;
+    padding: 1rem;
+    color: white;
+    border-width: 3px;
+    border-style: solid;
+    border-image:
+            linear-gradient(
+                    to bottom,
+                    red,
+                    rgba(0, 0, 0, 0)
+            ) 1 100%;
+}
+
+.notLookingForAJob {
+    max-width: 250px;
+    padding: 1rem;
+    color: white;
+    border-width: 3px;
+    border-style: solid;
+    border-image:
+            linear-gradient(
+                    to bottom,
+                    blue,
+                    rgba(0, 0, 0, 0)
+            ) 1 100%;
+}
+
+.userProfile {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.userImg {
+    margin: 20px;
+}
+
+.userProfileData {
+    margin: 20px 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.userName {
+    font-weight: 400;
+    font-size: 26px;
+    font-family: "Comic Sans MS";
+}
+
+.userStatus {
+    margin-top: 15px;
+    font-size: 20px;
+    font-family: "Courier New";
+}
+
+.userContacts {
+    margin: 20px 40px;
+    font-size: 18px;
+    text-align: right;
+}
+
+.userContacts ul {
+    line-height: 35px;
+}
+
+li {
+    list-style-type: disc !important;
+}
