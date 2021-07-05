@@ -1,17 +1,15 @@
 import React from 'react';
 import {
-    followAC,
-    unfollowAC,
-    setUsersAC,
-    setSelectedPageAC,
-    setTotalUsersCountAC,
-    setIsFetchingAC
+    followAC as followOn,
+    unfollowAC as unfollowOn,
+    setUsersAC as setUsers,
+    setSelectedPageAC as setSelectedPage,
+    setTotalUsersCountAC as  setTotalUsersCount,
+    setIsFetchingAC as setIsFetching
 } from "../../redux/usersReducer";
 import {connect} from "react-redux";
 import * as axios from "axios";
 import Users from "./Users";
-import load from '../../assets/images/loader.gif'
-import i from './Users.module.css'
 import Preloader from "../common/Preloader/Preloader";
 
 class UsersAPIComponent extends React.Component {
@@ -37,7 +35,6 @@ class UsersAPIComponent extends React.Component {
                 this.props.setIsFetching(false);
             }
         );
-
     }
 
     render() {
@@ -75,8 +72,8 @@ const mapStateToProps = (state) => {
     )
 };
 
-
-const mapDispatchToProps = (dispatch) => {
+// оставляю для просмотра, все упрощено в 58 уроке
+/*const mapDispatchToProps = (dispatch) => {
     return (
         {
             followOn: (userId) => {
@@ -99,9 +96,11 @@ const mapDispatchToProps = (dispatch) => {
             },
         }
     )
-};
+};*/
 
-const UsersContainer = connect (mapStateToProps, mapDispatchToProps) (UsersAPIComponent);
+const UsersContainer = connect (mapStateToProps,
+    {followOn, unfollowOn, setUsers, setSelectedPage, setTotalUsersCount, setIsFetching}
+    ) (UsersAPIComponent);
 
 export default UsersContainer;
 
