@@ -1,15 +1,18 @@
 import React from 'react';
 import p from './ProfileInfo.module.css';
+import userNoPhoto from "../../../assets/images/faceoff.jpg";
 import Preloader from "../../common/Preloader/Preloader";
 
 const ProfileInfo = (props) => {
+
 
     if (!props.profile) {
         return <Preloader/>
     }
 
+
     const data = props.profile;
-    const bigImg = (props.profile.photos.large) ? props.profile.photos.large : null;
+    const bigImg = (props.profile.photos.large) ? props.profile.photos.large : userNoPhoto;
 
     return (
         <div className={p.content}>
