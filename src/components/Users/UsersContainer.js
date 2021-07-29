@@ -4,7 +4,7 @@ import {
     unfollowAC as unfollowOn,
     setUsersAC as setUsers,
     setSelectedPageAC as setSelectedPage,
-    setTotalUsersCountAC as  setTotalUsersCount,
+    setTotalUsersCountAC as setTotalUsersCount,
     setIsFetchingAC as setIsFetching
 } from "../../redux/usersReducer";
 import {connect} from "react-redux";
@@ -27,8 +27,7 @@ class UsersAPIComponent extends React.Component {
     }
 
 
-
-    onPageChange= (page) => {
+    onPageChange = (page) => {
         this.props.setSelectedPage(page);
         this.props.setIsFetching(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`).then(response => {
@@ -43,17 +42,14 @@ class UsersAPIComponent extends React.Component {
 
         return (
             <>
-                {this.props.isFetching ?
-                   <Preloader/>
-                    :
-                    <Users totalUsersCount={this.props.totalUsersCount}
-                           pageSize={this.props.pageSize}
-                           onPageChange={this.onPageChange}
-                           selectedPage={this.props.selectedPage}
-                           users={this.props.users}
-                           unfollowOn={this.props.unfollowOn}
-                           followOn={this.props.followOn}
-                    />
+                <Users totalUsersCount={this.props.totalUsersCount}
+                       pageSize={this.props.pageSize}
+                       onPageChange={this.onPageChange}
+                       selectedPage={this.props.selectedPage}
+                       users={this.props.users}
+                       unfollowOn={this.props.unfollowOn}
+                       followOn={this.props.followOn}
+                />
                 }
             </>
 
@@ -100,9 +96,9 @@ const mapStateToProps = (state) => {
     )
 };*/
 
-const UsersContainer = connect (mapStateToProps,
+const UsersContainer = connect(mapStateToProps,
     {followOn, unfollowOn, setUsers, setSelectedPage, setTotalUsersCount, setIsFetching}
-    ) (UsersAPIComponent);
+)(UsersAPIComponent);
 
 export default UsersContainer;
 
