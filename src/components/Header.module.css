@@ -11,6 +11,16 @@
     margin: 10px 20px;
 }
 
+.login {
+    float: right;
+    color: white;
+    font-weight: 500;
+}
+
+.login a {
+    color: white;
+}
+
 .menu {
     display: flex;
     margin: 10px 20px;
