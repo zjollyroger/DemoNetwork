@@ -2,8 +2,7 @@ import React from "react";
 import i from './Users.module.css'
 import userNoPhoto from "../../assets/images/faceoff.jpg";
 import {NavLink} from "react-router-dom";
-import * as axios from "axios";
-import {Follow, UnFollow} from "../../api/api";
+import {UsersAPI} from "../../api/api";
 
 const Users = (props) => {
 
@@ -42,7 +41,7 @@ const Users = (props) => {
                             {(user.followed)
                                 ?
                                 <button className={i.button} onClick={() =>
-                                    UnFollow(user.id).then(data => {
+                                    UsersAPI.UnFollow(user.id).then(data => {
                                         if (data.resultCode === 0) {
                                             props.unfollowOn(user.id)
                                         }
@@ -51,7 +50,7 @@ const Users = (props) => {
 
                                 :
                                 <button className={i.button} onClick={() =>
-                                    Follow(user.id).then(data => {
+                                    UsersAPI.Follow(user.id).then(data => {
                                         if (data.resultCode === 0) {
                                             props.followOn(user.id)
                                         }

@@ -11,13 +11,13 @@ import {connect} from "react-redux";
 import * as axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-import {getUsers} from "../../api/api";
+import {UsersAPI} from "../../api/api";
 
 class UsersAPIComponent extends React.Component {
 
     componentDidMount() {
         this.props.setIsFetching(true);
-        getUsers(this.props.selectedPage, this.props.pageSize).then(data => {
+        UsersAPI.getUsers(this.props.selectedPage, this.props.pageSize).then(data => {
                 console.log(data.items, 'api here');
                 this.props.setIsFetching(false);
                 this.props.setUsers(data.items);
@@ -31,7 +31,7 @@ class UsersAPIComponent extends React.Component {
     onPageChange = (page) => {
         this.props.setSelectedPage(page);
         this.props.setIsFetching(true);
-        getUsers(page, this.props.pageSize).then(data => {
+        UsersAPI.getUsers(page, this.props.pageSize).then(data => {
                 console.log(data.items, 'api here');
                 this.props.setUsers(data.items);
                 this.props.setIsFetching(false);
@@ -51,7 +51,7 @@ class UsersAPIComponent extends React.Component {
                        unfollowOn={this.props.unfollowOn}
                        followOn={this.props.followOn}
                 />
-                }
+
             </>
 
         );
