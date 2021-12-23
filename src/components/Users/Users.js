@@ -3,6 +3,7 @@ import i from './Users.module.css'
 import userNoPhoto from "../../assets/images/faceoff.jpg";
 import {NavLink} from "react-router-dom";
 import {UsersAPI} from "../../api/api";
+// import axios from "axios";
 
 const Users = (props) => {
 
@@ -40,21 +41,33 @@ const Users = (props) => {
 
                             {(user.followed)
                                 ?
-                                <button className={i.button} onClick={() =>
+                                <button disabled={props.isDisable} className={'i.button'} onClick={() => {
+                                    props.setIsDisable(true);
                                     UsersAPI.UnFollow(user.id).then(data => {
                                         if (data.resultCode === 0) {
                                             props.unfollowOn(user.id)
                                         }
-                                    })}
+                                    });
+                                    props.setIsDisable(false);
+                                }
+                                }
                                 >UnFollow</button>
 
                                 :
-                                <button className={i.button} onClick={() =>
-                                    UsersAPI.Follow(user.id).then(data => {
-                                        if (data.resultCode === 0) {
-                                            props.followOn(user.id)
-                                        }
-                                    })}
+                                <button disabled={props.isDisable}
+                                        className={'i.button'}
+                                        onClick={() => {
+                                            props.setIsDisable(true);
+                                            UsersAPI.Follow(user.id).then(data => {
+                                                if (data.resultCode === 0) {
+                                                    props.followOn(user.id)
+                                                 }
+                                            });
+                                            props.setIsDisable(false);
+
+                                }
+                                }
+
                                 >Follow me </button>
 
                             }
