@@ -65,9 +65,9 @@ const Users = (props) => {
                                                 if (data.resultCode === 0) {
                                                     props.unfollowOn(user.id);
                                                 }
+                                                setIsDisable(false, user.id);
                                             });
-                                            // setIsDisable(true, user.id);
-                                            setIsDisable(false, user.id);
+                                            // здесь работать не будет setIsDisable(true, user.id);
                                         }
                                 }
                                 >UnFollow</button>
@@ -81,12 +81,10 @@ const Users = (props) => {
                                             if (data.resultCode === 0) {
                                                 props.followOn(user.id);
                                             }
+                                            setIsDisable(false, user.id);
                                         });
-                                        setIsDisable(false, user.id);
-
                                     }
                                 }
-
                                 >Follow me </button>
 
                             }

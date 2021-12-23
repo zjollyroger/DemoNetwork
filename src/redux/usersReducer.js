@@ -25,7 +25,7 @@ const initialState = {
     totalUsersCount: 0,
     selectedPage: 1,
     isFetching: 1,
-    isDisable: [21475],
+    isDisable: [],
 }
 
 const usersReducer = (state = initialState, action) => {
