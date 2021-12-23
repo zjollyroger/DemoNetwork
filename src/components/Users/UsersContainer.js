@@ -6,7 +6,7 @@ import {
     setSelectedPageAC as setSelectedPage,
     setTotalUsersCountAC as setTotalUsersCount,
     setIsFetchingAC as setIsFetching,
-    setIsDisable as setIsDisable
+    setIsDisable
 } from "../../redux/usersReducer";
 import {connect} from "react-redux";
 // import * as axios from "axios";
@@ -42,7 +42,7 @@ class UsersAPIComponent extends React.Component {
 
     render() {
         return (
-            <>
+            <div>
                 <Users totalUsersCount={this.props.totalUsersCount}
                        pageSize={this.props.pageSize}
                        onPageChange={this.onPageChange}
@@ -54,7 +54,7 @@ class UsersAPIComponent extends React.Component {
                        setIsDisable={this.props.setIsDisable}
                 />
 
-            </>
+            </div>
 
         );
     }
@@ -101,7 +101,10 @@ const mapStateToProps = (state) => {
 };*/
 
 const UsersContainer = connect(mapStateToProps,
-    {followOn, unfollowOn, setUsers, setSelectedPage, setTotalUsersCount, setIsFetching, setIsDisable}
+    {
+        followOn, unfollowOn, setUsers, setSelectedPage,
+        setTotalUsersCount, setIsFetching, setIsDisable
+    }
 )(UsersAPIComponent);
 
 export default UsersContainer;

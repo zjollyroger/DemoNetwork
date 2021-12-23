@@ -14,6 +14,20 @@ const Users = (props) => {
         pagesArr = [...pagesArr, i];
     }
 
+    const isDisable = props.isDisable;
+    const setIsDisable = props.setIsDisable;
+
+    const OnUnFollow = (user) => {
+        setIsDisable(true, user);
+        // debugger
+            UsersAPI.UnFollow(user).then(data => {
+                if (data.resultCode === 0) {
+                    props.unfollowOn(user);
+                }
+            });
+        setIsDisable(false, user);
+    }
+
     return (
         <div>
 
@@ -39,33 +53,38 @@ const Users = (props) => {
                                      alt="faceoff"/>
                             </NavLink>
 
-                            {(user.followed)
+                            {user.followed
                                 ?
-                                <button disabled={props.isDisable} className={'i.button'} onClick={() => {
-                                    props.setIsDisable(true);
-                                    UsersAPI.UnFollow(user.id).then(data => {
-                                        if (data.resultCode === 0) {
-                                            props.unfollowOn(user.id)
+                                <button disabled={isDisable.find(id=>id===user.id)}
+                                        className={'i.button'}
+                                        onClick={()=> {
+                                            // OnUnFollow(user.id)
+                                            setIsDisable(true, user.id);
+                                            // debugger
+                                            UsersAPI.UnFollow(user.id).then(data => {
+                                                if (data.resultCode === 0) {
+                                                    props.unfollowOn(user.id);
+                                                }
+                                            });
+                                            // setIsDisable(true, user.id);
+                                            setIsDisable(false, user.id);
                                         }
-                                    });
-                                    props.setIsDisable(false);
-                                }
                                 }
                                 >UnFollow</button>
 
                                 :
-                                <button disabled={props.isDisable}
-                                        className={'i.button'}
-                                        onClick={() => {
-                                            props.setIsDisable(true);
-                                            UsersAPI.Follow(user.id).then(data => {
-                                                if (data.resultCode === 0) {
-                                                    props.followOn(user.id)
-                                                 }
-                                            });
-                                            props.setIsDisable(false);
+                                <button disabled={isDisable.find(id => id===user.id)}
+                                    className={'i.button'}
+                                    onClick={() => {
+                                        setIsDisable(true, user.id);
+                                        UsersAPI.Follow(user.id).then(data => {
+                                            if (data.resultCode === 0) {
+                                                props.followOn(user.id);
+                                            }
+                                        });
+                                        setIsDisable(false, user.id);
 
-                                }
+                                    }
                                 }
 
                                 >Follow me </button>

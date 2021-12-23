@@ -12,7 +12,7 @@ export const setUsersAC = (users) => ({type: SET_USERS, users});
 export const setSelectedPageAC = (selectedPage) => ({type: SET_PAGE, selectedPage});
 export const setTotalUsersCountAC = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount})
 export const setIsFetchingAC = (isFetching) => ({type: IS_FETCHING, isFetching});
-export const setIsDisable = (isDisable) => ({type: IS_DISABLE, isDisable});
+export const setIsDisable = (isDisable, userId) => ({type: IS_DISABLE, isDisable, userId});
 
 const initialState = {
     users: [
@@ -25,7 +25,7 @@ const initialState = {
     totalUsersCount: 0,
     selectedPage: 1,
     isFetching: 1,
-    isDisable: false,
+    isDisable: [21475],
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -76,7 +76,8 @@ const usersReducer = (state = initialState, action) => {
 
         case (IS_DISABLE) :
             return {
-                ...state, isDisable: action.isDisable
+                ...state,
+                isDisable: (action.isDisable) ? [...state.isDisable, action.userId] : state.isDisable.filter(user => user != action.userId )
             }
 
         default:
