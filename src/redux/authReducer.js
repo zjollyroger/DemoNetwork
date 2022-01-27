@@ -1,8 +1,25 @@
+import {AuthAPI} from "../api/api";
+
 const SET_USER_DATA = 'SET_USER_DATA';
 const IS_FETCHING = 'IS_FETCHING';
 
-export const setAuthUserDataActionCreator = (userId, email, login) => ({type: SET_USER_DATA, data:{userId, email, login}});
-export const setIsFetchingActionCreator = (isFetching) =>  ({type: IS_FETCHING, isFetching});
+export const setAuthUserData = (userId, email, login) => ({type: SET_USER_DATA, data:{userId, email, login}});
+export const setIsFetching = (isFetching) =>  ({type: IS_FETCHING, isFetching});
+
+export const AuthMeThunk = () => {
+    return (dispatch) => {
+        dispatch(setIsFetching(true));
+        AuthAPI.AuthMe().then(response => {
+            // console.log(response.data, 'api here');
+               dispatch(setIsFetching(false));
+                if(response.data.resultCode === 0) {
+                    let {id, email, login} = response.data.data;
+                    dispatch(setAuthUserData( id, email, login));
+                }
+            }
+        );
+    }
+}
 
 const initialState = {
     userId: null,

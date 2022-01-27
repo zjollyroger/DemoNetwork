@@ -8,11 +8,15 @@ const instance = axios.create({
     }
 });
 
+export const AuthAPI = {
+    AuthMe () {
+        return instance.get(`auth/me`);
+    },
+
+}
+
 export const UsersAPI = {
 
-    Auth () {
-        return instance.get(`auth/me`).then(response => response.data);
-    },
 
     GetProfileData (id) {
         return  instance.get(`profile/${id}`).then(response => response.data);

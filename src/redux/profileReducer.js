@@ -1,10 +1,22 @@
+import {UsersAPI} from "../api/api";
+
 const ADD_POST = 'ADD_POST';
 const TYPE_NEW_TEXT = 'TYPE_NEW_TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
 export const addPostActionCreator = () => ({type: ADD_POST});
 export const updateNewPostText = (text) => ({type: TYPE_NEW_TEXT, newText: text});
-export const setUserProfileAC = (profile) => ({type: SET_USER_PROFILE, profile});
+export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
+
+export const GetProfileData = (userId) => {
+    return (dispatch) => {
+        UsersAPI.GetProfileData(userId).then(response => {
+                // console.log(response, 'api here');
+                dispatch(setUserProfile(response));
+            }
+        );
+    }
+};
 
 const initialState = {
     posts: [
