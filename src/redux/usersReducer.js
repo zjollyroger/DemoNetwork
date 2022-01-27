@@ -1,3 +1,5 @@
+import {UsersAPI} from "../api/api";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -13,6 +15,46 @@ export const setSelectedPageAC = (selectedPage) => ({type: SET_PAGE, selectedPag
 export const setTotalUsersCountAC = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount})
 export const setIsFetchingAC = (isFetching) => ({type: IS_FETCHING, isFetching});
 export const setIsDisable = (isDisable, userId) => ({type: IS_DISABLE, isDisable, userId});
+
+// thunk
+
+export const getUsers = (selectedPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(setIsFetchingAC(true));
+        UsersAPI.getUsers(selectedPage, pageSize).then(data => {
+            // console.log(data.items, 'api here');
+            dispatch(setUsersAC(data.items));
+            dispatch(setSelectedPageAC(selectedPage));
+            dispatch(setTotalUsersCountAC(data.totalCount));
+            dispatch(setIsFetchingAC(false));
+        });
+    }
+};
+
+
+export const followThunkCreator = (userId) => {
+    return (dispatch) => {
+        dispatch(setIsDisable(true, userId));
+        UsersAPI.Follow(userId).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(followAC(userId));
+            }
+            dispatch(setIsDisable(false, userId));
+        });
+    }
+};
+
+export const unfollowThunkCreator = (userId) => {
+    return (dispatch) => {
+        dispatch(setIsDisable(true, userId));
+        UsersAPI.UnFollow(userId).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(unfollowAC(userId));
+            }
+            dispatch(setIsDisable(false, userId));
+        });
+    }
+};
 
 const initialState = {
     users: [

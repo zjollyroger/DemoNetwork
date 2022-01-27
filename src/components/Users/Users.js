@@ -2,8 +2,6 @@ import React from "react";
 import i from './Users.module.css'
 import userNoPhoto from "../../assets/images/faceoff.jpg";
 import {NavLink} from "react-router-dom";
-import {UsersAPI} from "../../api/api";
-// import axios from "axios";
 
 const Users = (props) => {
 
@@ -15,22 +13,10 @@ const Users = (props) => {
     }
 
     const isDisable = props.isDisable;
-    const setIsDisable = props.setIsDisable;
 
-    const OnUnFollow = (user) => {
-        setIsDisable(true, user);
-        // debugger
-            UsersAPI.UnFollow(user).then(data => {
-                if (data.resultCode === 0) {
-                    props.unfollowOn(user);
-                }
-            });
-        setIsDisable(false, user);
-    }
 
     return (
         <div>
-
             <h4 className={i.pages}>TOTAL USERS: {props.totalUsersCount}</h4>
 
             <div className={i.pages}>
@@ -57,33 +43,13 @@ const Users = (props) => {
                                 ?
                                 <button disabled={isDisable.find(id=>id===user.id)}
                                         className={'i.button'}
-                                        onClick={()=> {
-                                            // OnUnFollow(user.id)
-                                            setIsDisable(true, user.id);
-                                            // debugger
-                                            UsersAPI.UnFollow(user.id).then(data => {
-                                                if (data.resultCode === 0) {
-                                                    props.unfollowOn(user.id);
-                                                }
-                                                setIsDisable(false, user.id);
-                                            });
-                                            // здесь работать не будет setIsDisable(true, user.id);
-                                        }
-                                }
+                                        onClick={ ()=> props.unfollowThunkCreator(user.id) }
                                 >UnFollow</button>
 
                                 :
                                 <button disabled={isDisable.find(id => id===user.id)}
                                     className={'i.button'}
-                                    onClick={() => {
-                                        setIsDisable(true, user.id);
-                                        UsersAPI.Follow(user.id).then(data => {
-                                            if (data.resultCode === 0) {
-                                                props.followOn(user.id);
-                                            }
-                                            setIsDisable(false, user.id);
-                                        });
-                                    }
+                                    onClick={() => {props.followThunkCreator(user.id)}
                                 }
                                 >Follow me </button>
 

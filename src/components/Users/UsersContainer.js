@@ -1,12 +1,6 @@
 import React from 'react';
 import {
-    followAC as followOn,
-    unfollowAC as unfollowOn,
-    setUsersAC as setUsers,
-    setSelectedPageAC as setSelectedPage,
-    setTotalUsersCountAC as setTotalUsersCount,
-    setIsFetchingAC as setIsFetching,
-    setIsDisable
+    followThunkCreator, unfollowThunkCreator, getUsers
 } from "../../redux/usersReducer";
 import {connect} from "react-redux";
 // import * as axios from "axios";
@@ -17,27 +11,14 @@ import {UsersAPI} from "../../api/api";
 class UsersAPIComponent extends React.Component {
 
     componentDidMount() {
-        this.props.setIsFetching(true);
-        UsersAPI.getUsers(this.props.selectedPage, this.props.pageSize).then(data => {
-                console.log(data.items, 'api here');
-                this.props.setIsFetching(false);
-                this.props.setUsers(data.items);
-                this.props.setTotalUsersCount(data.totalCount);
 
-            }
-        );
+        this.props.getUsers(this.props.selectedPage, this.props.pageSize);
+
     }
 
 
     onPageChange = (page) => {
-        this.props.setSelectedPage(page);
-        this.props.setIsFetching(true);
-        UsersAPI.getUsers(page, this.props.pageSize).then(data => {
-                console.log(data.items, 'api here');
-                this.props.setUsers(data.items);
-                this.props.setIsFetching(false);
-            }
-        );
+        this.props.getUsers(page, this.props.pageSize);
     }
 
     render() {
@@ -48,10 +29,9 @@ class UsersAPIComponent extends React.Component {
                        onPageChange={this.onPageChange}
                        selectedPage={this.props.selectedPage}
                        users={this.props.users}
-                       unfollowOn={this.props.unfollowOn}
-                       followOn={this.props.followOn}
                        isDisable={this.props.isDisable}
-                       setIsDisable={this.props.setIsDisable}
+                       followThunkCreator={this.props.followThunkCreator}
+                       unfollowThunkCreator={this.props.unfollowThunkCreator}
                 />
 
             </div>
@@ -68,7 +48,6 @@ const mapStateToProps = (state) => {
             pageSize: state.usersPage.pageSize,
             totalUsersCount: state.usersPage.totalUsersCount,
             selectedPage: state.usersPage.selectedPage,
-            isFetching: state.usersPage.isFetching,
             isDisable: state.usersPage.isDisable,
         }
     )
@@ -102,8 +81,7 @@ const mapStateToProps = (state) => {
 
 const UsersContainer = connect(mapStateToProps,
     {
-        followOn, unfollowOn, setUsers, setSelectedPage,
-        setTotalUsersCount, setIsFetching, setIsDisable
+        getUsers, unfollowThunkCreator, followThunkCreator,
     }
 )(UsersAPIComponent);
 

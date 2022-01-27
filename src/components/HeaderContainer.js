@@ -5,21 +5,22 @@ import {setAuthUserDataActionCreator as setAuthUserData } from "../redux/authRed
 import {connect} from "react-redux";
 import {setIsFetchingAC as setIsFetching} from "../redux/usersReducer";
 import Preloader from "./common/Preloader/Preloader";
+import {UsersAPI} from "../api/api";
 
 class HeaderContainer extends React.Component {
 
     componentDidMount() {
         this.props.setIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true}).then(response => {
-                console.log(response.data.data, 'api here');
+        UsersAPI.Auth().then(response => {
+                // console.log(response.data, 'api here');
             this.props.setIsFetching(false);
-                if(response.data.resultCode === 0) {
-                    let {id, email, login} = response.data.data;
+                if(response.resultCode === 0) {
+                    let {id, email, login} = response.data;
                     this.props.setAuthUserData( id, email, login);
 
-                    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${id}`).then(response => {
-                        console.log('my profile data', response.data);
-                    })
+                   /* UsersAPI.GetProfileData(id).then(response => {
+                        console.log('my profile data', response);
+                    });*/
                 }
             }
         );
