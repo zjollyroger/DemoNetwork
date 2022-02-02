@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import Users from "./Users";
 // import Preloader from "../common/Preloader/Preloader";
 import {UsersAPI} from "../../api/api";
+import {withAuthRedirect} from "../hoc/withAuthRedirect";
 
 class UsersAPIComponent extends React.Component {
 
@@ -79,11 +80,11 @@ const mapStateToProps = (state) => {
     )
 };*/
 
-const UsersContainer = connect(mapStateToProps,
+const UsersContainer = withAuthRedirect(connect(mapStateToProps,
     {
         getUsers, unfollowThunkCreator, followThunkCreator,
     }
-)(UsersAPIComponent);
+)(UsersAPIComponent));
 
 export default UsersContainer;
 
