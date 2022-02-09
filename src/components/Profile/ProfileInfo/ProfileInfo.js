@@ -2,6 +2,7 @@ import React from 'react';
 import p from './ProfileInfo.module.css';
 import userNoPhoto from "../../../assets/images/faceoff.jpg";
 import Preloader from "../../common/Preloader/Preloader";
+import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = (props) => {
 
@@ -34,8 +35,10 @@ const ProfileInfo = (props) => {
                         {data.fullName}
                     </div>
 
+
+
                     <div className={p.userStatus}>
-                        {data.aboutMe}
+                        <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                     </div>
 
                     <div className={p.userStatus}>

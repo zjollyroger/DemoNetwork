@@ -17,11 +17,10 @@ export const AuthAPI = {
 
 export const UsersAPI = {
 
-
     GetProfileData (id) {
-        return  instance.get(`profile/${id}`).then(response => response.data);
+        console.warn('Obsolete method, please use ProfileApi object here');
+        return  ProfileApi.GetProfileData(id);
     },
-
 
     getUsers (selectedPage = 1, pageSize = 10)  {
         return instance.get(`users?page=${selectedPage}&count=${pageSize}`)
@@ -37,7 +36,21 @@ export const UsersAPI = {
         return instance.delete(`follow/${userId}`)
             .then(response => response.data);
     },
-
-
 }
+
+export const ProfileApi = {
+
+    GetStatus(userId=2) {
+        return instance.get(`profile/status/${userId}`);
+    },
+
+    UpdateStatus(newStatus) {
+        return instance.put(`profile/status`, {status: newStatus});
+    },
+
+    GetProfileData (id) {
+        return  instance.get(`profile/${id}`).then(response => response.data);
+    },
+}
+
 
