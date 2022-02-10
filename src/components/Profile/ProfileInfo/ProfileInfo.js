@@ -38,7 +38,7 @@ const ProfileInfo = (props) => {
 
 
                     <div className={p.userStatus}>
-                        <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                        <ProfileStatus status={props.status} updateStatus={props.updateStatus} isFetching={props.isFetching}/>
                     </div>
 
                     <div className={p.userStatus}>

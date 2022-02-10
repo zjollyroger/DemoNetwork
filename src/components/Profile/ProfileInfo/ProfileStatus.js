@@ -1,5 +1,6 @@
 import React from "react";
 import {ProfileApi} from "../../../api/api";
+import Preloader from "../../common/Preloader/Preloader";
 
 class ProfileStatus extends React.Component {
 
@@ -23,6 +24,7 @@ class ProfileStatus extends React.Component {
     }
 
     render() {
+        if (this.props.isFetching) return <Preloader/>
         return(
             <div>
                 {!(this.state.editMode)

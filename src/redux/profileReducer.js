@@ -5,12 +5,14 @@ const TYPE_NEW_TEXT = 'TYPE_NEW_TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SELECT_USER = 'SELECT_USER';
 const SET_STATUS = 'SET_STATUS';
+const IS_FETCHING = 'IS_FETCHING';
 
 // action creators
 export const addPostActionCreator = () => ({type: ADD_POST});
 export const updateNewPostText = (text) => ({type: TYPE_NEW_TEXT, newText: text});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const setStatus = (status) => ({type: SET_STATUS, status});
+export const setIsFetching = (isFetching) => ({type: IS_FETCHING, isFetching});
 
 // Сани
 export const getStatus = (userId) => {
@@ -25,8 +27,10 @@ export const getStatus = (userId) => {
 
 export const updateStatus = (status) => {
     return (dispatch) => {
+        dispatch(setIsFetching(true));
         ProfileApi.UpdateStatus(status).then(res => {
             // console.log(res);
+            dispatch(setIsFetching(false));
             if (res.data.resultCode === 0) {
                 dispatch(setStatus(status));
             }
@@ -56,6 +60,7 @@ const initialState = {
     profile: null,
     selectedUser: null,
     status: '',
+    isFetching: false,
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -83,6 +88,11 @@ const profileReducer = (state = initialState, action) => {
 
           case (SET_STATUS) :
               return {...state, status: action.status};
+
+          case (IS_FETCHING) :
+              return {
+                  ...state, isFetching: action.isFetching
+              }
 
         default:
             return (state);
