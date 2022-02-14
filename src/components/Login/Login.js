@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form'
 
 const onSubmit = (formData) => {
     console.log(formData);
+    // props.LoginThunk(formData.login, formData.password);
 }
 
 const LoginForm = (props) => {
@@ -12,7 +13,7 @@ const LoginForm = (props) => {
                     <Field placeholder='login' name="login" type="text" component="input"/>
                 </div>
                 <div>
-                    <Field placeholder='pass' name="pass" type="password" component="input"/>
+                    <Field placeholder='pass' name="password" type="password" component="input"/>
                 </div>
                 <div>
                     <Field id='remember' name="remember" type="checkbox" component="input"/>Remember me
@@ -32,7 +33,7 @@ const Login = (props) => {
     return(
         <div>
             <h1>Login Page</h1>
-            <ContactForm onSubmit={onSubmit}/>
+            <ContactForm onSubmit={onSubmit} LoginThunk={props.LoginThunk}/>
         </div>
     )
 };

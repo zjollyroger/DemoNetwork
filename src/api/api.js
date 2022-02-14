@@ -13,6 +13,10 @@ export const AuthAPI = {
         return instance.get(`auth/me`);
     },
 
+    Login (email, password) {
+        return instance.post('/auth/login', {email, password}).then(res=>console.log(res));
+    }
+
 }
 
 export const UsersAPI = {
@@ -51,6 +55,10 @@ export const ProfileApi = {
     GetProfileData (id) {
         return  instance.get(`profile/${id}`).then(response => response.data);
     },
-}
+};
+
+
+
+
 
 

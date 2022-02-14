@@ -19,6 +19,14 @@ export const AuthMeThunk = () => {
             }
         );
     }
+};
+
+export const LoginThunk = (email, password) => {
+    return (dispatch) => {
+        AuthAPI.Login(email, password);
+
+    }
+
 }
 
 const initialState = {
