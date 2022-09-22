@@ -1,13 +1,50 @@
 import React from "react";
-import { Field, reduxForm } from 'redux-form'
+import {Field, reduxForm} from "redux-form";
+import {maxLengthCreator, required} from "../../utils/validators/FormValidator";
+import {Input} from "../common/FormControls/FormControls";
 
-const onSubmit = (formData) => {
-    console.log(formData);
-    // props.LoginThunk(formData.login, formData.password);
+const Login = () => {
+    return(
+        <div>
+            <h3>Login please</h3>
+
+            <ReduxLoginForm onSubmit={onSubmit}/>
+        </div>
+    )
 }
 
+const onSubmit = (data) => {
+    console.log(data);
+}
+
+const maxLengthValidate10 = maxLengthCreator(10);
+
 const LoginForm = (props) => {
-    return(
+    return (
+        <form action="" onSubmit={props.handleSubmit}>
+            <div><Field validate={[required, maxLengthValidate10]} component={Input} type='text' placeholder='login' name='login'/></div>
+            <div><Field validate={[required, maxLengthValidate10]} component={Input} type='password' placeholder='password' name='password'/></div>
+            <div><Field component={Input} type='checkbox' name='remember'/>Remember me</div>
+            <button>Sign in</button>
+
+        </form>
+    )
+}
+
+const ReduxLoginForm = reduxForm({form: 'loginForm'})(LoginForm);
+
+export default Login;
+/*
+import { Field, reduxForm } from 'redux-form'
+import {LoginThunk} from "../../redux/authReducer";
+
+
+
+const Login = (props) => {
+
+
+    const LoginForm = (props) => {
+        return(
             <form action="" onSubmit={props.handleSubmit}>
                 <div>
                     <Field placeholder='login' name="login" type="text" component="input"/>
@@ -20,20 +57,23 @@ const LoginForm = (props) => {
                 </div>
                 <button type="submit" >Login</button>
             </form>
-    )
-};
+        )
+    };
 
-const ContactForm = reduxForm({
-    // a unique name for the form
-    form: 'loginForm'
-})(LoginForm);
+    const ReduxLoginForm = reduxForm({
+        // a unique name for the form
+        form: 'loginForm'
+    })(LoginForm);
 
+    const onSubmit = (data) => {
+        LoginThunk(data.login, data.password);
+        console.log(data.login, data.password, 'data');
+    }
 
-const Login = (props) => {
     return(
         <div>
             <h1>Login Page</h1>
-            <ContactForm onSubmit={onSubmit} LoginThunk={props.LoginThunk}/>
+            <ReduxLoginForm onSubmit={onSubmit} />
         </div>
     )
 };
@@ -41,3 +81,4 @@ const Login = (props) => {
 
 
 export default Login;
+*/

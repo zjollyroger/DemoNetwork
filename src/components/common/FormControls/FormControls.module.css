@@ -1,0 +1,27 @@
+.formControl {
+    display: flex;
+    margin: 10px;
+    flex-direction: column;
+}
+
+.errorText {
+    display: flex;
+    /*width: 150px;*/
+    margin: 4px;
+    /*justify-content: center;*/
+    color: red;
+    font-weight: bold;
+}
+
+.fieldArea {
+    display: flex;
+    /*margin: 10px;*/
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    /*width: 70vw;*/
+    border: red 2px solid;
+    border-radius: 5px;
+    /*padding: 10px 5px;*/
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}

@@ -14,7 +14,8 @@ export const AuthAPI = {
     },
 
     Login (email, password) {
-        return instance.post('/auth/login', {email, password}).then(res=>console.log(res));
+        return instance.post(`/auth/login`, {email, password})
+            .then(res=>console.log(res, ' resault of login '));
     }
 
 }

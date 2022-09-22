@@ -6,8 +6,8 @@ import Login from "./Login";
 let mapStateToProps = (state) => {
     return(
         {
-            /*email: state.form.loginForm.login,
-            password: state.form.loginForm.password,*/
+            // email: state.form.loginForm.login,
+            // password: state.form.loginForm.password,
         }
     )
 };
