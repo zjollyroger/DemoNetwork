@@ -3,11 +3,12 @@ import {Field, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../utils/validators/FormValidator";
 import {Input} from "../common/FormControls/FormControls";
 import Redirect from "react-router-dom/es/Redirect";
+import style from "../common/FormControls/FormControls.module.css";
 
 const Login = (props) => {
 
     const onSubmit = (data) => {
-        console.log(data);
+        // console.log(data);
         props.LoginThunk(data.email, data.password, data.rememberMe);
     }
 
@@ -28,7 +29,8 @@ const maxLengthValidate30 = maxLengthCreator(30);
 
 const LoginForm = (props) => {
     return (
-        <form action="" onSubmit={props.handleSubmit}>
+        <form action="" onSubmit={props.handleSubmit} className={props.error ? style.formCommonError : ''}>
+            {props.error && <div className={style.errorText}>{props.error}</div>}
             <div><Field validate={[required, maxLengthValidate30]} component={Input} type='text' placeholder='login' name='email'/></div>
             <div><Field validate={[required, maxLengthValidate30]} component={Input} type='password' placeholder='password' name='password'/></div>
             <div><Field component={Input} type='checkbox' name='remember'/>Remember me</div>

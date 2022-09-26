@@ -1,4 +1,5 @@
 import {AuthAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 const IS_FETCHING = 'IS_FETCHING';
@@ -25,6 +26,7 @@ export const LoginThunk = (email, password, rememberMe) => {
     return (dispatch) => {
         AuthAPI.Login(email, password, rememberMe).then(response => {
             console.log(response);
+            //succes
             if(response.data.resultCode === 0) {
                 console.log(response.data)
                 let {userId} = response.data.data;
@@ -39,6 +41,13 @@ export const LoginThunk = (email, password, rememberMe) => {
 
                 // Запустили выше
                 // dispatch(setAuthUserData(userId, email, email, true));
+            }
+            // error email or password
+            else {
+                let message = (response.data.messages && response.data.messages.length>0)
+                    ? response.data.messages[0]
+                    : "Common error of authorization";
+                dispatch(stopSubmit("loginForm", {_error: message }));
             }
         });
     }
