@@ -3,7 +3,7 @@ import {AuthAPI} from "../api/api";
 const SET_USER_DATA = 'SET_USER_DATA';
 const IS_FETCHING = 'IS_FETCHING';
 
-export const setAuthUserData = (userId, email, login) => ({type: SET_USER_DATA, data:{userId, email, login}});
+export const setAuthUserData = (userId, email, login, isAuth= false) => ({type: SET_USER_DATA, payload:{userId, email, login, isAuth}});
 export const setIsFetching = (isFetching) =>  ({type: IS_FETCHING, isFetching});
 
 export const AuthMeThunk = () => {
@@ -14,21 +14,46 @@ export const AuthMeThunk = () => {
                dispatch(setIsFetching(false));
                 if(response.data.resultCode === 0) {
                     let {id, email, login} = response.data.data;
-                    dispatch(setAuthUserData( id, email, login));
+                    dispatch(setAuthUserData(id, email, login, true));
                 }
             }
         );
     }
 };
 
-export const LoginThunk = (email, password) => {
+export const LoginThunk = (email, password, rememberMe) => {
     return (dispatch) => {
-        AuthAPI.Login(email, password).then(response => {
+        AuthAPI.Login(email, password, rememberMe).then(response => {
             console.log(response);
+            if(response.data.resultCode === 0) {
+                console.log(response.data)
+                let {userId} = response.data.data;
+
+                //need login
+                AuthAPI.AuthMe().then(res => {
+                    if (res.data.resultCode === 0) {
+                        let {login} = res.data.data;
+                        dispatch(setAuthUserData(userId, email, login, true));
+                    }
+                })
+
+                // Запустили выше
+                // dispatch(setAuthUserData(userId, email, email, true));
+            }
         });
-
     }
+}
 
+export const LogoutThunk = () => {
+    return (dispatch) => {
+        AuthAPI.Logout().then(res => {
+            console.log(res);
+            if (res.data.resultCode === 0) {
+                let options = {userId: null, email: null, login: null, isAuth: false};
+                dispatch(setAuthUserData(options));
+            }
+        });
+    }
 }
 
 const initialState = {
@@ -45,8 +70,8 @@ const authReducer = (state = initialState, action) => {
         case (SET_USER_DATA) :
             return {
                 ...state,
-                ...action.data,
-                isAuth: true,
+                ...action.payload,
+                // isAuth: true,
             };
         case (IS_FETCHING) :
             return {
