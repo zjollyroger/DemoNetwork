@@ -7,20 +7,19 @@ const IS_FETCHING = 'IS_FETCHING';
 export const setAuthUserData = (userId, email, login, isAuth= false) => ({type: SET_USER_DATA, payload:{userId, email, login, isAuth}});
 export const setIsFetching = (isFetching) =>  ({type: IS_FETCHING, isFetching});
 
-export const AuthMeThunk = () => {
-    return (dispatch) => {
-        dispatch(setIsFetching(true));
-        AuthAPI.AuthMe().then(response => {
-            // console.log(response.data, 'api here');
-               dispatch(setIsFetching(false));
+export const AuthMeThunk = () =>
+     (dispatch) => {
+        // dispatch(setIsFetching(true));
+         return AuthAPI.AuthMe().then(response => {
+               // dispatch(setIsFetching(false));
                 if(response.data.resultCode === 0) {
                     let {id, email, login} = response.data.data;
                     dispatch(setAuthUserData(id, email, login, true));
                 }
             }
         );
-    }
-};
+    };
+
 
 export const LoginThunk = (email, password, rememberMe) => {
     return (dispatch) => {
@@ -32,15 +31,7 @@ export const LoginThunk = (email, password, rememberMe) => {
                 let {userId} = response.data.data;
 
                 //need login
-                AuthAPI.AuthMe().then(res => {
-                    if (res.data.resultCode === 0) {
-                        let {login} = res.data.data;
-                        dispatch(setAuthUserData(userId, email, login, true));
-                    }
-                })
-
-                // Запустили выше
-                // dispatch(setAuthUserData(userId, email, email, true));
+                dispatch(AuthMeThunk());
             }
             // error email or password
             else {
