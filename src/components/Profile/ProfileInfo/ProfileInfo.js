@@ -3,6 +3,7 @@ import p from './ProfileInfo.module.css';
 import userNoPhoto from "../../../assets/images/faceoff.jpg";
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus";
+import ProfileStatusFunctional from "./ProfileStatusFunctional";
 
 const ProfileInfo = (props) => {
 
@@ -38,7 +39,8 @@ const ProfileInfo = (props) => {
 
 
                     <div className={p.userStatus}>
-                        <ProfileStatus status={props.status} updateStatus={props.updateStatus} isFetching={props.isFetching}/>
+                        {/*<ProfileStatus status={props.status} updateStatus={props.updateStatus} isFetching={props.isFetching}/>*/}
+                        <ProfileStatusFunctional status={props.status} updateStatus={props.updateStatus} isFetching={props.isFetching}/>
                     </div>
 
                     <div className={p.userStatus}>
