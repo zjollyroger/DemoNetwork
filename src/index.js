@@ -9,6 +9,12 @@ import store from "./redux/reduxStore";
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 
+// selectors test
+// setInterval(() => {
+//     store.dispatch({type: "FAKE"})
+// }, 1000);
+
+
 // let rerender = () => {
     ReactDOM.render(
         <BrowserRouter>

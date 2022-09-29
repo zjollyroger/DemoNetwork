@@ -8,6 +8,13 @@ import Users from "./Users";
 // import Preloader from "../common/Preloader/Preloader";
 import {withAuthRedirect} from "../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {
+    getIsDisable,
+    getPageSizeSelector,
+    getSelectedPage,
+    getTotalUsersCount,
+    getUsersSelector, getUsersSuperSelector
+} from "../../selectors/usersSelector";
 
 class UsersAPIComponent extends React.Component {
 
@@ -23,6 +30,7 @@ class UsersAPIComponent extends React.Component {
     }
 
     render() {
+        console.log('render');
         return (
             <div>
                 <Users totalUsersCount={this.props.totalUsersCount}
@@ -43,13 +51,22 @@ class UsersAPIComponent extends React.Component {
 
 
 const mapStateToProps = (state) => {
+    console.log("fake dispatch");
     return (
         {
-            users: state.usersPage.users,
-            pageSize: state.usersPage.pageSize,
-            totalUsersCount: state.usersPage.totalUsersCount,
-            selectedPage: state.usersPage.selectedPage,
-            isDisable: state.usersPage.isDisable,
+            // users: state.usersPage.users,
+            // pageSize: state.usersPage.pageSize,
+            // totalUsersCount: state.usersPage.totalUsersCount,
+            // selectedPage: state.usersPage.selectedPage,
+            // isDisable: state.usersPage.isDisable,
+
+        //    selectors:
+        //     users: getUsersSelector(state),
+            users: getUsersSuperSelector(state),
+            pageSize: getPageSizeSelector(state),
+            totalUsersCount: getTotalUsersCount(state),
+            selectedPage: getSelectedPage(state),
+            isDisable: getIsDisable(state),
         }
     )
 };
