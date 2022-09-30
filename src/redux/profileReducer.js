@@ -5,12 +5,14 @@ const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SELECT_USER = 'SELECT_USER';
 const SET_STATUS = 'SET_STATUS';
 const IS_FETCHING = 'IS_FETCHING';
+const DELETE_POST = "DELETE_POST";
 
 // action creators
 export const addPost = (post) => ({type: ADD_POST, post});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const setStatus = (status) => ({type: SET_STATUS, status});
 export const setIsFetching = (isFetching) => ({type: IS_FETCHING, isFetching});
+export const deletePost = (postId) => ({type: DELETE_POST, postId});
 
 // Сани
 export const getStatus = (userId) => {
@@ -88,7 +90,13 @@ const profileReducer = (state = initialState, action) => {
           case (IS_FETCHING) :
               return {
                   ...state, isFetching: action.isFetching
-              }
+              };
+
+          case (DELETE_POST):
+              return {
+                  ...state,
+                  posts: state.posts.filter(post => post.id !== action.postId)};
+
 
         default:
             return (state);
