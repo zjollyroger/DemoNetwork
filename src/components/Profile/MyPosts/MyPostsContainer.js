@@ -8,7 +8,7 @@ let mapStateToProps = (state) => {
     return(
         {
             posts: state.profilePage.posts,
-            typingValue: state.profilePage.newPostText,
+            // typingValue: state.profilePage.newPostText,
         }
     )
 };
