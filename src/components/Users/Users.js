@@ -2,6 +2,7 @@ import React from "react";
 import i from './Users.module.css'
 import userNoPhoto from "../../assets/images/faceoff.jpg";
 import {NavLink} from "react-router-dom";
+import Paginator from "../common/Paginator/Paginator";
 
 const Users = (props) => {
 
@@ -19,6 +20,7 @@ const Users = (props) => {
         <div>
             <h4 className={i.pages}>TOTAL USERS: {props.totalUsersCount}</h4>
 
+{/*
             <div className={i.pages}>
                 {pagesArr.map((page, index) =>
                     <span key={index} onClick={() => props.onPageChange(page)}
@@ -26,6 +28,15 @@ const Users = (props) => {
                 )}
 
             </div>
+*/}
+
+            <hr/>
+
+            {Paginator(props.totalUsersCount, props.pageSize, props.selectedPage, props.onPageChange)}
+
+            <hr/>
+
+
             {props.users.map((user, key) => {
 
                 return (

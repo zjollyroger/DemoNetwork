@@ -51,7 +51,7 @@ class UsersAPIComponent extends React.Component {
 
 
 const mapStateToProps = (state) => {
-    console.log("fake dispatch");
+    // console.log("fake dispatch");
     return (
         {
             // users: state.usersPage.users,
